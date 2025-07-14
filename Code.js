@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
@@ -46,12 +46,10 @@ function generateRandomTodos() {
   return todos;
 }
 
-app.get("/todos", (req, res) => {
-  const todos = generateRandomTodos();
-  res.json(todos);
+app.get("/", (req, res) => {
+  res.json(generateRandomTodos());
 });
 
-// Start the server
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
